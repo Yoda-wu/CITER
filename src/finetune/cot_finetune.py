@@ -4,7 +4,8 @@ import os
 import torch
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments
-
+os.environ["WANDB_API_KEY"] = 'bdd2db80b2bf94ef45f06029b702ccb5013134eb'
+os.environ['WANDB_MODE'] = 'offline'  # 禁用wandb在线模式
 
 def main():
     parser = argparse.ArgumentParser(
@@ -33,7 +34,7 @@ def main():
 
     # model configurations
     parser.add_argument(
-        "--model_name", type=str, default="Qwen/Qwen2-7B", help="LLM model name."
+        "--model_name", type=str, default="Qwen/Qwen2-1.5B", help="LLM model name."
     )
     parser.add_argument(
         "--output_dir",
@@ -47,7 +48,7 @@ def main():
         "--learning_rate", type=float, default=2e-5, help="Learning rate."
     )
     parser.add_argument(
-        "--batch_size", type=int, default=3, help="Batch size per device."
+        "--batch_size", type=int, default=1, help="Batch size per device."
     )
     parser.add_argument(
         "--num_train_epochs", type=int, default=10, help="Number of training epochs."
